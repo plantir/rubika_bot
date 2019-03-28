@@ -1,0 +1,12 @@
+{
+  "scripts": {
+    "test": "node example/index.js"
+  },
+  "dependencies": {
+    "debug": "^4.1.1",
+    "events": "^3.0.0",
+    "redis": "^2.8.0",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.2"
+  }
+}

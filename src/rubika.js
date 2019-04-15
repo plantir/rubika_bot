@@ -409,36 +409,11 @@ class Rubikabot extends EventEmitter {
    * @see https://core.telegram.org/bots/api#setwebhook
    * @see https://github.com/yagop/node-telegram-bot-api/blob/master/doc/usage.md#sending-files
    */
-  setWebHook(url, options = {}, fileOptions = {}) {
-    /* The older method signature was setWebHook(url, cert).
-     * We need to ensure backwards-compatibility while maintaining
-     * consistency of the method signatures throughout the library */
-    let cert;
-    // Note: 'options' could be an object, if a stream was provided (in place of 'cert')
-    if (typeof options !== 'object' || options instanceof stream.Stream) {
-      deprecate('The method signature setWebHook(url, cert) has been deprecated since v0.25.0');
-      cert = options;
-      options = {}; // eslint-disable-line no-param-reassign
-    } else {
-      cert = options.certificate;
+  updateBotEndpoints(url, options = { type: 'NewMessage' }) {
+    let body = {
+      data: options
     }
-
-    const opts = {
-      qs: options,
-    };
-    opts.qs.url = url;
-
-    if (cert) {
-      try {
-        const sendData = this._formatSendData('certificate', cert, fileOptions);
-        opts.formData = sendData[0];
-        opts.qs.certificate = sendData[1];
-      } catch (ex) {
-        return Promise.reject(ex);
-      }
-    }
-
-    return this._request('setWebHook', opts);
+    return this._request('updateBotEndpoints', { body });
   }
 
   /**

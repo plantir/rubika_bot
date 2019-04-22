@@ -409,11 +409,15 @@ class Rubikabot extends EventEmitter {
    * @see https://core.telegram.org/bots/api#setwebhook
    * @see https://github.com/yagop/node-telegram-bot-api/blob/master/doc/usage.md#sending-files
    */
-  updateBotEndpoints(url, options = { type: 'NewMessage' }) {
+  updateBotEndpoints(url, options = {
+    type: 'NewMessage'
+  }) {
     let body = {
       data: options
     }
-    return this._request('updateBotEndpoints', { body });
+    return this._request('updateBotEndpoints', {
+      body
+    });
   }
 
   /**
@@ -477,7 +481,7 @@ class Rubikabot extends EventEmitter {
     const callbackQuery = update.callback_query;
     const shippingQuery = update.shipping_query;
     const preCheckoutQuery = update.pre_checkout_query;
-
+    const file = update.file_inline;
     if (text) {
       debug('Process Update message %j', text);
       this.emit('message', update);
@@ -510,6 +514,8 @@ class Rubikabot extends EventEmitter {
       //     }
       //   });
       // }
+    } else if (file) {
+      this.emit('file', update);
     } else if (editedMessage) {
       debug('Process Update edited_message %j', editedMessage);
       this.emit('edited_message', editedMessage);

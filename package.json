@@ -1,9 +1,13 @@
 {
-  "version": "0.5.0",
+  "version": "1.0.0",
   "name": "rubika-bot",
   "scripts": {
-    "test": "node example/index.js"
+    "test": "node example/index.js",
+    "release": "git push origin next && yarn publish"
   },
+  "main": "main/rubika.js",
+  "repository": "https://github.com/vrwebdesign/rubika_bot.git",
+  "author": "armin kheirkhahan",
   "dependencies": {
     "debug": "^4.1.1",
     "events": "^3.0.0",

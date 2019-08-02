@@ -1,6 +1,6 @@
 {
   "version": "0.5.0",
-  "name": "node-rubika-bot-api",
+  "name": "rubika-bot",
   "scripts": {
     "test": "node example/index.js"
   },
